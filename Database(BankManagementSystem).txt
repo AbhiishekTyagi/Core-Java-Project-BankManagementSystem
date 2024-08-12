@@ -1,0 +1,398 @@
+Last login: Mon Aug 12 08:22:51 on ttys000
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % pwd
+/Users/abhishektyagi_1
+RadhaPutraAbhishektyagi@Abhisheks-MacBook-Air ~ % mysql -u root -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 34
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show schemas;
++----------------------+
+| Database             |
++----------------------+
+| ABES                 |
+| bankmanagementsystem |
+| Books                |
+| BookShop             |
+| constraints          |
+| DBMS                 |
+| information_schema   |
+| mysql                |
+| performance_schema   |
+| Practice             |
+| RadheKrishna         |
+| Shirt                |
+| sys                  |
+| Triggers             |
+| View                 |
++----------------------+
+15 rows in set (0.01 sec)
+
+mysql> use bankmanagementsystem;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++--------------------------------+
+| Tables_in_bankmanagementsystem |
++--------------------------------+
+| bank                           |
+| Login                          |
+| signup                         |
+| SignupThree                    |
+| SignupTwo                      |
++--------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+---------+
+| PinNo | Date                         | type      | amount  |
++-------+------------------------------+-----------+---------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12345   |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 1234rt  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 1200000 |
++-------+------------------------------+-----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> desc bank;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| PinNo  | varchar(12) | YES  |     | NULL    |       |
+| Date   | varchar(38) | YES  |     | NULL    |       |
+| type   | varchar(20) | YES  |     | NULL    |       |
+| amount | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> delete amount from bank;
+ERROR 1109 (42S02): Unknown table 'amount' in MULTI DELETE
+mysql> update bank set amount=12000000;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from bank;
++-------+------------------------------+-----------+----------+
+| PinNo | Date                         | type      | amount   |
++-------+------------------------------+-----------+----------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000000 |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000000 |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000000 |
++-------+------------------------------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update bank set amount=12000;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
++-------+------------------------------+-----------+--------+
+3 rows in set (0.01 sec)
+
+mysql> select * from Login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 2815  |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 2815  | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
++-------+------------------------------+-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 2815  | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 2815  | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
++-------+------------------------------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 2815  | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 2815  | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 2815  | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
++-------+------------------------------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 2815  | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 2815  | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 2815  | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 2815  | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 2815  | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
++-------+------------------------------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------------------+
+| Tables_in_bankmanagementsystem |
++--------------------------------+
+| bank                           |
+| Login                          |
+| signup                         |
+| SignupThree                    |
+| SignupTwo                      |
++--------------------------------+
+5 rows in set (0.01 sec)
+
+mysql> desc SignupThree;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| FormNo | varchar(20)  | YES  |     | NULL    |       |
+| AccTy  | varchar(20)  | YES  |     | NULL    |       |
+| crdNo  | varchar(20)  | YES  |     | NULL    |       |
+| PinNo  | varchar(20)  | YES  |     | NULL    |       |
+| fasi   | varchar(200) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Signupthree;
++--------+----------------+------------------+-------+-----------+
+| FormNo | AccTy          | crdNo            | PinNo | fasi      |
++--------+----------------+------------------+-------+-----------+
+|        | Saving Account | 5040936087612041 | 3920  |  ATM CARD |
+| 8019   | Saving Account | 5040936047967394 | 2815  |  ATM CARD |
++--------+----------------+------------------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank;'
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 2815  | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 2815  | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 2815  | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 2815  | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 2815  | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 2815  | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 2815  | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+    '> ^C
+mysql> select * from Login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 2815  |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from Login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 2815  |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank;'
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+    '> ^C
+mysql> select * from Login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 123   |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++--------------------------------+
+| Tables_in_bankmanagementsystem |
++--------------------------------+
+| bank                           |
+| Login                          |
+| signup                         |
+| SignupThree                    |
+| SignupTwo                      |
++--------------------------------+
+5 rows in set (0.02 sec)
+
+mysql> select * from abnk;
+ERROR 1146 (42S02): Table 'bankmanagementsystem.abnk' doesn't exist
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 123   |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 123   |
++--------+------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
++-------+------------------------------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 123   |
+| 3364   | 5040936053093132 | 1139  |
++--------+------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from bank;
++-------+------------------------------+-----------+--------+
+| PinNo | Date                         | type      | amount |
++-------+------------------------------+-----------+--------+
+|       | Mon Aug 12 08:59:33 IST 2024 | Withdrawl | 12000  |
+|       | Mon Aug 12 09:21:59 IST 2024 | Withdrawl | 12000  |
+| 123   | Mon Aug 12 09:49:15 IST 2024 | Deposit   | 12000  |
+| 123   | Mon Aug 12 10:20:01 IST 2024 | Deposit   | 13000  |
+| 123   | Mon Aug 12 10:20:22 IST 2024 | Withdrawl | 13000  |
+| 123   | Mon Aug 12 10:20:42 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:22:23 IST 2024 | Withdrawl | 1000   |
+| 123   | Mon Aug 12 10:22:33 IST 2024 | Withdrawl | 5000   |
+| 123   | Mon Aug 12 10:23:09 IST 2024 | Withdrawl | 1000   |
+| 1139  | Mon Aug 12 17:52:30 IST 2024 | Deposit   | 120000 |
+| 1139  | Mon Aug 12 17:53:04 IST 2024 | Withdrawl | 5000   |
+| 1139  | Mon Aug 12 17:53:20 IST 2024 | Withdrawl | 1000   |
+| 1139  | Mon Aug 12 17:53:27 IST 2024 | Withdrawl | 10000  |
++-------+------------------------------+-----------+--------+
+13 rows in set (0.03 sec)
+
+mysql> select * from login;
++--------+------------------+-------+
+| FormNo | CardNo           | PinNo |
++--------+------------------+-------+
+|        | 5040936087612041 | 3920  |
+| 8019   | 5040936047967394 | 123   |
+| 3364   | 5040936053093132 | 1139  |
++--------+------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> 
